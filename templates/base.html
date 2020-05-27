@@ -27,6 +27,7 @@
             {% if not user.is_authenticated%}
             <li><a href="{% url 'login' %}">Login</a></li>
             <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="menu/add_item">Add menu item</a></li>
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">

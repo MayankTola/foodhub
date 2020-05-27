@@ -16,13 +16,8 @@ class User(AbstractUser):
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    phone_number = models.CharField(max_length=20)
-    location = models.CharField(max_length=20)
     food_pref = models.CharField(max_length=10, default='veg')
 
 
 class Restaurant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    restaurant_name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20)
-    designation = models.CharField(max_length=20)
