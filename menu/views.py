@@ -54,8 +54,6 @@ def menu_delete(request, id):
     return redirect("/menu/view/")
 
 
-
-
 def menu_global_view(request):
     content = menu_details.objects.all()
     return render(request, "menu/menu_view.html", {'content': content})
