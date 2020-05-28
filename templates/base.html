@@ -2,6 +2,7 @@
 {% load static %}
 <html>
 <head>
+    <title>FoodHUB</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,13 +25,15 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
-            {% if not user.is_authenticated%}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'register' %}">Register</a></li>
-            <li><a href="menu/add_item">Add menu item</a></li>
+            {% if user.is_restaurant%}<li><a href="{% url 'MenuForm' %}">Add menu item</a></li>
+            }<li><a href="{% url 'MenuView' %}">View Your Menu</a></li>
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            {% if not user.is_authenticated%}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
            {% if user.is_authenticated%} <li><a href=""><span class="glyphicon glyphicon-user"></span>    {{ request.user.username }} </a></li>
             <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
             {% endif %}
