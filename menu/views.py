@@ -10,9 +10,9 @@ def Menu_form(request):
     if request.method == "POST":
         form = menu_form(request.POST or None, request.FILES)
         if form.is_valid():
-            rest = form.save(commit=False)
-            rest.restaurant_name = request.user
-            rest.save()
+            menu = form.save(commit=False)
+            menu.restaurant_name = request.user
+            menu.save()
             return redirect("/")
         else:
             print(form.errors)
@@ -23,7 +23,6 @@ def Menu_form(request):
 def menu_view(request):
     # content = menu_details.objects.all()
     content = menu_details.objects.filter(restaurant_name=request.user)
-    print(request.user)
     return render(request, "menu/menu_view.html", {'content': content})
 
 
@@ -31,8 +30,9 @@ def menu_view(request):
 def menu_edit(request, id):
     content = menu_details.objects.get(id=id)
     form = menu_form(request.POST or None, instance=content)
-
     return render(request, 'menu/menu_update.html', {'form': form, 'content': content})
+
+
 #
 #
 @login_required()
@@ -52,3 +52,10 @@ def menu_delete(request, id):
     content = menu_details.objects.get(id=id)
     content.delete()
     return redirect("/menu/view/")
+
+
+
+
+def menu_global_view(request):
+    content = menu_details.objects.all()
+    return render(request, "menu/menu_view.html", {'content': content})

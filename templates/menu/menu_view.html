@@ -44,9 +44,9 @@
 </script>
 
 
-<center><H1>{{ title }} Details</H1></center>
+<center><H1>Your Menu Details</H1></center>
 <table id="myTable" class="table table-striped table-bordered table-sm">
-    <center><a href="/handover_form" class="btn btn-primary">Create new incident</a></center>
+    <center><a href="{% url 'MenuForm' %}" class="btn btn-primary">Add New Item</a></center>
     <thead class="thead-dark">
     <tr>
         <th>Dish</th>
@@ -63,11 +63,11 @@
 {% for content in content %}
     <tr>
         <td>{{ content.dish_name }}</td>
-        <td>{{ content.dish_type}}</td>
+        <td>{% if content.dish_type == "veg" %}<span class="dot_active"></span>   {{ content.dish_type}}{% endif %}
+        {% if  content.dish_type == "nonveg" %}<span class="dot_closed"></span>   {{ content.dish_type}}{% endif %}</td>
         <td>{{ content.price }}</td>
         <td>{{ content.description }}</td>
-        <td>{% if content.status == "Active" %}<span class="dot_active"></span>{{ content.status}}{% endif %}
-        {% if  content.status == "Closed" %}<span class="dot_closed"></span>{{ content.status}}{% endif %}</td>
+        <td></td>
         <td>
             <a href="/menu/edit/{{ content.id }}"><span class="glyphicon glyphicon-pencil"> Edit</span></a>
             <a href="/menu/delete/{{ content.id }}"><span class="glyphicon glyphicon-pencil"> Delete</span></a>

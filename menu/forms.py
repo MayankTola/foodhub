@@ -8,8 +8,7 @@ class menu_form(forms.ModelForm):
         model = menu_details
         exclude = ('restaurant_name',)
         fields = "__all__"
-        widgets = dict(restaurant_name=forms.Select(attrs={'class': 'form-control'}),
-                       dish_name=forms.TextInput(attrs={'class': "form-control"}),
+        widgets = dict(dish_name=forms.TextInput(attrs={'class': "form-control"}),
                        dish_type=forms.Select(attrs={'class': 'form-control'}),
                        price=forms.TextInput(attrs={'class': "form-control"}),
                        description=forms.Textarea(attrs={'class': "form-control"}))

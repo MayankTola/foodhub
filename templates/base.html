@@ -25,6 +25,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
+            <li><a href="{% url 'MenuGlobal' %}">Menu</a></li>
             {% if user.is_restaurant%}<li><a href="{% url 'MenuForm' %}">Add menu item</a></li>
             }<li><a href="{% url 'MenuView' %}">View Your Menu</a></li>
             {% endif %}
