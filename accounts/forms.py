@@ -23,7 +23,6 @@ class CustomerSignUpForm(UserCreationForm):
         user.is_customer = True
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
-        user.food_pref = self.cleaned_data.get('food_pref')
         user.save()
         customer = Customer.objects.create(user=user)
         customer.food_pref = self.cleaned_data.get('food_pref')
@@ -59,7 +58,7 @@ class CustomerSignUpForm(UserCreationForm):
 
 
 class RestaurantSignUpForm(UserCreationForm):
-    # restaurant_name = forms.CharField(required=True)
+    restaurant_name = forms.CharField(required=True)
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required=True)
 
@@ -75,13 +74,16 @@ class RestaurantSignUpForm(UserCreationForm):
         user.last_name = self.cleaned_data.get('last_name')
         user.save()
         restaurant = Restaurant.objects.create(user=user)
-        # restaurant.restaurant_name = self.cleaned_data.get('restaurant_name')
+        restaurant.restaurant_name = self.cleaned_data.get('restaurant_name')
         restaurant.save()
         return user
 
     def __init__(self, *args, **kwargs):
         super(RestaurantSignUpForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+            "name": "username"})
+        self.fields['restaurant_name'].widget.attrs.update({
             'class': 'form-control',
             "name": "Restaurant Name"})
         self.fields['first_name'].widget.attrs.update({

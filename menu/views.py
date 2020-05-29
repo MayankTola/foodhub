@@ -55,13 +55,14 @@ def menu_delete(request, id):
 
 
 def menu_global_view(request):
+    pr=request.user.customer.food_pref
+    print(pr)
     content = menu_details.objects.all()
     return render(request, "menu/order_view.html", {'content': content})
 
 
 @login_required()
-def order_edit(request, id):
-
+def order_placed(request, id):
     content = menu_details.objects.get(id=id)
     menu_content = menu_details.objects.all()
     cust_name = request.user.username
@@ -77,3 +78,7 @@ def order_edit(request, id):
     return render(request, 'menu/order_view.html', {'content': menu_content})
 
 
+@login_required()
+def view_orders(request):
+    content = order_details.objects.filter(restaurant_name=request.user)
+    return render(request, "order/order_view.html", {'content': content})

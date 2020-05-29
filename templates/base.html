@@ -26,8 +26,10 @@
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="{% url 'MenuGlobal' %}">Menu</a></li>
+            {% if user.is_customer%}<li><a href="{% url 'MenuGlobal' %}">Orders</a></li>{% endif %}
             {% if user.is_restaurant%}<li><a href="{% url 'MenuForm' %}">Add menu item</a></li>
             }<li><a href="{% url 'MenuView' %}">View Your Menu</a></li>
+            <li><a href="{% url 'ViewOrders' %}">View Orders</a></li>
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">

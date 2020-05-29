@@ -21,3 +21,4 @@ class Customer(models.Model):
 
 class Restaurant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    restaurant_name = models.CharField(max_length=100, blank=False)
