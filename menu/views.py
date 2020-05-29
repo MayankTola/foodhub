@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import *
@@ -33,8 +35,6 @@ def menu_edit(request, id):
     return render(request, 'menu/menu_update.html', {'form': form, 'content': content})
 
 
-#
-#
 @login_required()
 def menu_update(request, id):
     content = menu_details.objects.get(id=id)
@@ -56,4 +56,24 @@ def menu_delete(request, id):
 
 def menu_global_view(request):
     content = menu_details.objects.all()
-    return render(request, "menu/menu_view.html", {'content': content})
+    return render(request, "menu/order_view.html", {'content': content})
+
+
+@login_required()
+def order_edit(request, id):
+
+    content = menu_details.objects.get(id=id)
+    menu_content = menu_details.objects.all()
+    cust_name = request.user.username
+    r_name = content.restaurant_name
+    dish_name = content.dish_name
+    dish_type = content.dish_type
+    price = content.price
+    description = content.description
+
+    data = order_details(customer_name=cust_name, restaurant_name=r_name, description=description,
+                         dish_name=dish_name, dish_type=dish_type, price=price)
+    data.save()
+    return render(request, 'menu/order_view.html', {'content': menu_content})
+
+
