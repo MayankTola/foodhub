@@ -42,16 +42,13 @@ body {
 <script type="text/javascript" src="{% static 'js//datetime-js/bootstrap-datetimepicker.min.js' %}"></script>
 
 
-<form class="form" method = 'POST' action= '.' enctype="multipart/form-data">
+<form class="form" method = 'POST' action= '' enctype="multipart/form-data">
     <h2 class="form-heading">Add New Item</h2>
-          {{ form.as_p}}
           {% csrf_token %}
+          {{ form.as_p}}
     <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     <br>
-    <script type="text/javascript">
-        $(".form_datetime").datetimepicker({format: "yyyy-mm-dd hh:ii:ss"});
-    </script>
 </form>
 
 

@@ -48,27 +48,25 @@
 <table id="myTable" class="table table-striped table-bordered table-sm">
     <thead class="thead-dark">
     <tr>
-        <th>Customer Name</th>
+       {% if title == "restaurant" %}<th>Customer Name</th>{% endif %}
+       {% if title == "customer" %}<th>Restaurant Name</th>{% endif %}
         <th>Order Date</th>
         <th>Dish Name</th>
         <th>Type</th>
         <th>Price</th>
-        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
 {% for content in content %}
     <tr>
-        <td>{{ content.customer_name }}</td>
+        {% if title == "restaurant" %}<td>{{ content.customer_name }}</td>{% endif %}
+        {% if title == "customer" %}<td>{{ content.restaurant_name }}</td>{% endif %}
         <td>{{ content.order_date }}</td>
         <td>{{ content.dish_name }}</td>
         <td>{% if content.dish_type == "veg" %}<span class="dot_active"></span>   {{ content.dish_type}}{% endif %}
         {% if  content.dish_type == "nonveg" %}<span class="dot_closed"></span>   {{ content.dish_type}}{% endif %}</td>
         <td>{{ content.price }}</td>
-        <td>
-            <a href="/menu/edit/{{ content.id }}" class="btn btn-success">Confirm</span></a>
-            <a href="/menu/delete/{{ content.id }}" class="btn btn-danger">Cancel</span></a>
-        </td>
+
     </tr>
 {% endfor %}
     </tbody>

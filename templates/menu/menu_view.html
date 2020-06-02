@@ -49,8 +49,8 @@
     <center><a href="{% url 'MenuForm' %}" class="btn btn-primary">Add New Item</a></center>
     <thead class="thead-dark">
     <tr>
-        <th>Dish</th>
-        <th>Type</th>
+        <th>Dish Name</th>
+        <th>Dish Type</th>
         <th>Price</th>
         <th>Description</th>
         <th>Actions</th>
@@ -67,8 +67,8 @@
         <td>{{ content.price }}</td>
         <td>{{ content.description }}</td>
         <td>
-            <a href="/menu/edit/{{ content.id }}" class="btn btn-primary">Edit</a>
-            <a href="/menu/delete/{{ content.id }}" class="btn btn-danger">Delete</a>
+            <center><a href="/menu/edit/{{ content.id }}" class="btn btn-primary">Edit</a>
+            <a href="/menu/delete/{{ content.id }}" class="btn btn-danger">Delete</a></center>
         </td>
     </tr>
 {% endfor %}

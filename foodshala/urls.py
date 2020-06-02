@@ -28,6 +28,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path(r'menu/', include('menu.urls')),
+    path('menu/', include('menu.urls')),
     # path(r'order', include('menu.urls')),
 ]

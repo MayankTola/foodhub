@@ -10,8 +10,9 @@ urlpatterns = [
     path(r'edit/<int:id>', views.menu_edit, name='MenuEdit'),
     path(r'edit/update/<int:id>', views.menu_update, name='MenuUpdate'),
     path(r'delete/<int:id>', views.menu_delete, name='MenuDelete'),
-    path(r'order/<int:id>', views.order_placed, name='OrderFood'),
-    path(r'order', views.view_orders, name='ViewOrders'),
+    path(r'order/<int:id>', views.place_order, name='OrderFood'),
+    path(r'order-restaurant', views.view_orders_restaurant, name='ViewOrdersRestaurant'),
+    path(r'order-customer', views.view_orders_customer, name='ViewOrdersCustomer'),
 
 ]
 if settings.DEBUG:

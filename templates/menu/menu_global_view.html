@@ -28,7 +28,6 @@
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
-
 </style>
 {% endblock style %}
 
@@ -54,21 +53,20 @@
         <th>Price</th>
         <th>Description</th>
         <th>Actions</th>
-
-
     </tr>
     </thead>
     <tbody>
 {% for content in content %}
     <tr>
-        <td>{{ content.restaurant_name }}</td>
+        <td>{{ content.restaurant.restaurant.restaurant_name }}</td>
         <td>{{ content.dish_name }}</td>
         <td>{% if content.dish_type == "veg" %}<span class="dot_active"></span>   {{ content.dish_type}}{% endif %}
         {% if  content.dish_type == "nonveg" %}<span class="dot_closed"></span>   {{ content.dish_type}}{% endif %}</td>
         <td>{{ content.price }}</td>
         <td>{{ content.description }}</td>
         <td>
-         {% if not user.is_restaurant%}<a href="/menu/order/{{ content.id }}" class="btn btn-success">Order</a>
+         {% if not user.is_restaurant%}
+            <center><a href="/menu/order/{{ content.id }}"  class="btn btn-success cart" onclick="myFunction">Order Food</a></center>
          {% else %}<p class="text-danger">LogIn as Customer to Order Food.</p>{% endif %}
         </td>
     </tr>
@@ -76,3 +74,12 @@
     </tbody>
 </table>
 {% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}
+
+
+
+

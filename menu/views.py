@@ -13,9 +13,9 @@ def Menu_form(request):
         form = menu_form(request.POST or None, request.FILES)
         if form.is_valid():
             menu = form.save(commit=False)
-            menu.restaurant_name = request.user
+            menu.restaurant = request.user
             menu.save()
-            return redirect("/")
+            return redirect("/menu/view")
         else:
             print(form.errors)
     return render(request, "menu/menu_form.html", {"form": form})
@@ -23,8 +23,8 @@ def Menu_form(request):
 
 @login_required()
 def menu_view(request):
-    # content = menu_details.objects.all()
-    content = menu_details.objects.filter(restaurant_name=request.user)
+    # content = menu_details.objects.filter(restaurant_name=request.user.restaurant.restaurant_name)
+    content = menu_details.objects.filter(restaurant=request.user)
     return render(request, "menu/menu_view.html", {'content': content})
 
 
@@ -55,18 +55,17 @@ def menu_delete(request, id):
 
 
 def menu_global_view(request):
-    pr=request.user.customer.food_pref
-    print(pr)
     content = menu_details.objects.all()
-    return render(request, "menu/order_view.html", {'content': content})
+    return render(request, "menu/menu_global_view.html", {'content': content})
 
 
 @login_required()
-def order_placed(request, id):
-    content = menu_details.objects.get(id=id)
-    menu_content = menu_details.objects.all()
+def place_order(request, id):
+    content = menu_details.objects.get(id=id)  #for order details
+    menu_content = menu_details.objects.all()  #for showing data in global menu
+
     cust_name = request.user.username
-    r_name = content.restaurant_name
+    r_name = content.restaurant.restaurant.restaurant_name
     dish_name = content.dish_name
     dish_type = content.dish_type
     price = content.price
@@ -75,10 +74,18 @@ def order_placed(request, id):
     data = order_details(customer_name=cust_name, restaurant_name=r_name, description=description,
                          dish_name=dish_name, dish_type=dish_type, price=price)
     data.save()
-    return render(request, 'menu/order_view.html', {'content': menu_content})
+    return render(request, 'menu/menu_global_view.html', {'content': menu_content})
 
 
 @login_required()
-def view_orders(request):
-    content = order_details.objects.filter(restaurant_name=request.user)
-    return render(request, "order/order_view.html", {'content': content})
+def view_orders_restaurant(request):
+    content = order_details.objects.filter(restaurant_name=request.user.restaurant.restaurant_name)
+    title = 'restaurant'
+    return render(request, "order/order_view.html", {'content': content, 'title': title})
+
+
+@login_required()
+def view_orders_customer(request):
+    content = order_details.objects.filter(customer_name=request.user)
+    title = 'customer'
+    return render(request, "order/order_view.html", {'content': content, 'title': title})

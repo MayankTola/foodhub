@@ -8,7 +8,7 @@ from .models import User
 
 
 def register(request):
-    return render(request, '../templates/register.html')
+    return render(request, 'login/register.html')
 
 
 class customer_register(CreateView):
