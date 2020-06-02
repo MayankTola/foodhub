@@ -80,12 +80,12 @@ def place_order(request, id):
 @login_required()
 def view_orders_restaurant(request):
     content = order_details.objects.filter(restaurant_name=request.user.restaurant.restaurant_name)
-    title = 'restaurant'
+    title = 'Orders Received'
     return render(request, "order/order_view.html", {'content': content, 'title': title})
 
 
 @login_required()
 def view_orders_customer(request):
     content = order_details.objects.filter(customer_name=request.user)
-    title = 'customer'
+    title = 'Orders Placed'
     return render(request, "order/order_view.html", {'content': content, 'title': title})
